@@ -5,25 +5,79 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
+    <script src="https://unpkg.com/vue@3"></script>
     <title>Delphynet</title>
   </head>
-  <body style="
-          background-image: url('/public/alan-billyeald-blWi-H_6Jto-unsplash.jpg'); 
-          background-repeat: no-repeat;background-size: cover;
-          background-position: center;">
-          
+  <body
+    style="
+      background-image: url('/public/img/alan-billyeald-blWi-H_6Jto-unsplash.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+    "
+  >
     <div class="container">
-      <div class="columns">
-        <div id="column-1" class="column is-one-third">
-          <div class="card">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illo id,
-            officiis eaque neque corrupti, doloribus praesentium illum fugit,
-            commodi voluptatum cum repudiandae delectus? Dolores temporibus cum
-            rem? Optio, officia enim.fdfdfd
+      <div id="app" class="columns">
+        <div id="column-1" class="column is-flex is-justify-content-center">
+          <div
+            class="card is-flex is-flex-direction-column is-justify-content-center"
+          >
+            <h1 class="title is-2 has-text-centered">{{ datas.title }}</h1>
+            <div class="is-flex is-justify-content-space-evenly">
+              <img src="/public/img/wifi-logo.png" alt="wifi-logo.png" />
+              <img
+                src="/public/img/united-kingdom.png"
+                alt="united-kingdom.png"
+              />
+            </div>
+
+            <form action="" class="is-flex is-flex-direction-column is-justify-content-center">
+              <input type="text" name="" id="" placeholder="Login" class="mt-4" />
+              <input type="text" name="" id="" placeholder="Password" class="mt-4" />
+              <button id="button-connect" class="mt-4">Connect</button>
+            </form>
+            <div>
+              <p>By clicking “Connect” you accept the Terms of use</p>
+              <p>How to use?</p>
+            </div>
+           
+            <button id="button-signup">{{ languages.button1 }}</button>
+            <p>
+              Test your connection 10 min free here, or purchase credits here
+            </p>
+            <img src="/public/img/Logo_Delfynet.png" alt="Logo_Delfynet.png" />
           </div>
         </div>
-        <div id="column-2" class="column is-two-thirds"></div>
+        <div id="column-2" class="column is-two-thirds">
+          <iframe
+            src="https://www.retrocamping.be/?fbclid=IwAR0nDBpwMrkqK3cPUeWegevuJjKiz6i_miFD2jG6NEfdmQN29F0V4C_tLhE"
+            frameborder="0"
+            class="responsive-iframe"
+          ></iframe>
+        </div>
       </div>
     </div>
   </body>
 </html>
+
+<script>
+  Vue.createApp({
+    data() {
+      return {
+        datas: [],
+        languages: [],
+      };
+    },
+    mounted() {
+      let fetchdata = fetch("public/datas/site.json")
+        .then((res) => res.json())
+        .then((data) => (this.datas = data))
+        .catch((err) => console.log(err.message));
+
+      let fetchlanguage = fetch("public/datas/english.json")
+        .then((res) => res.json())
+        .then((data) => (this.languages = data))
+        .catch((err) => console.log(err.message));
+    },
+  }).mount("#app");
+</script>
